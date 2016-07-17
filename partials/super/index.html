@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app="myApp">
+<head>	
+	<meta charset="utf-8" />
+	<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+	<title>Super</title>
+
+	<link rel="stylesheet" type="text/css" href="" />
+
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <link href="../../../AdminLTE-2.3.3/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../Asample/lib/angular/angular.js"></script>
+    <script src="../../../Asample/lib/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+	<style type="text/css">
+		.box {
+			width:100px;
+			height: 100px;
+		}
+		.red {
+			background-color: red;
+		}
+		.green {
+			background-color: green;
+		}
+		.blue {
+			background-color: blue;
+		}
+		.black {
+			background-color: black;
+		}
+
+		
+		.status_style .ng-invalid {
+			border:3px solid red;
+		}
+		.status_style  .ng-valid {
+			border:3px solid green;
+		}
+		.status_style  .ng-pristin {
+			border-style: solid;
+		}
+		.status_style  .ng-dirty {
+			border-style: dashed;
+		}
+		
+		.box_black {
+			width: 100px;
+			height: 60px;
+			margin: 10px;
+			background-color: black;
+			color: white;
+			text-align: center;
+			padding-top: 40px;
+		}
+
+		.apple { background-color: red; }
+		.lemon { background-color: yellow; }
+		.even { background-color: blue; }
+	</style>
+</head>
+
+<body class="well">
+	<div ng-controller="TodoController">
+		<h1>{{ appName }}</h1>
+		<p>전체 할 일 <strong>{{todoList.length}}</strong>개 / 남은 할일은 <strong>{{remain()}}</strong>개 [<a href="" ng-click="archive()">보관하기</a>]</p>
+		<ul class="list-unstyled">
+			<li ng-repeat="todo in todoList" class="checkbox"><input ng-model="todo.done" type="checkbox">{{todo.title}}</li>
+		</ul>
+		<form name="newItemForm" class="form-inline">
+			<div class="form-group">
+				<label class="sr-only" for="newItemText">새로운 할 일</label>
+				<input type="text" class="form-control" name="newItemText" placeholder="새로운 할 일" ng-model="newTitle">
+			</div>
+			<button type="submit" class="btn btn-default" ng-click="addNewTodo(newTitle)">추가</button>
+		</form>
+	</div>
+	<hr />
+	<div ng-init = "person = {name: '재도', favorite: ['사과', '딸기', '포도']}">
+		<h1>Hello {{person.name}}</h1>
+		<p>좋아하는 과일의 갯수: {{numberOfFavorite = person.favorite.length}}</p>
+		<p>과일 갯수 * $100 = {{numberOfFavorite * 100 | currency}}</p>
+		<p>재도가 맞나요? {{person.name == '재도'}}</p>
+		<p>좋아하는 과일 수가 4개보다 많나요? {{numberOfFavorite > 4}}</p>
+		<p>scope에 없는 객체 접근 하면? {{car.type.name}}</p>
+		<h2>좋아하는 과일</h2>
+		<ul ng-repeat="fruit in person.favorite">
+			<li><a href='#{{fruit}}'>{{fruit}}</a></li>
+		</ul>
+	</div>
+	<hr />
+	<div ng-controller="mainCtrl">
+		<h1>메뉴판</h1>
+		<h2>메뉴 목록</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>메뉴</th>
+					<th>가격</th>
+					<th>갯수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="menu in menuList">
+					<td>{{menu.itemName}}</td>
+					<td>{{menu.itemPrice}}</td>
+					<td><input type="text" name="" ng-model="menu.itemCount"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button ng-click = "buy()" class="btn pull-right">구매</button>
+		<h2>구입가격</h2>
+		<div>
+			가격 : {{totalPrice | currency}}
+		</div>
+	</div>
+	<hr />
+
+	<div ng-init = "customerList = [{name: '영희', age: 25},{name: '순희', age: 28}]">
+		<ul>
+			<li ng-repeat="customer in customerList">
+				[{{$index + 1}}] 고객이름 : {{customer.name}}, 고객나이 : {{customer.age}}
+			</li>
+		</ul>
+	</div>
+	<div ng-init = "myFriend = {name: '철수', age: 25, hobby: '축구'}">
+		내 친구 소개
+		<ul>
+			<li ng-repeat="(attr, value) in myFriend">
+				<p>{{attr}} : {{value}}</p>
+			</li>
+		</ul>
+	</div>
+	<hr />
+
+	<div>
+		<input type="radio" ng-model="color" value="red"> 빨간색 <br>
+		<input type="radio" ng-model="color" value="green"> 녹색 <br>
+		<input type="radio" ng-model="color" value="blue"> 파란색 <br>
+		<div ng-switch="color">
+			<div ng-switch-when="red" class="box red"></div>
+			<div ng-switch-when="green" class="box green"></div>
+			<div ng-switch-when="blue" class="box blue"></div>
+			<div ng-switch-default class="box black"></div>
+		</div>
+	</div>
+	<hr />
+
+	<div>
+		약관에 동의: <input type="checkbox" ng-model="checked" ng-init="checked=false" |>
+		<br>
+		동의하면 다음으로 진행됩니다.
+		<button ng-if="checked">다음</button>
+		<br>
+		동의 여부: <input type="checkbox" ng-model="checked1" name="">
+		<br>
+		<div>
+			<span ng-show="checked1">다음으로 진행합니다. <button>계속</button></span>
+		</div>
+		<div>
+			<span ng-hide="checked1">다음으로 진행할 수 없습니다.</span>
+		</div>
+	</div>
+	<hr />
+		
+		<div ng-controller="customerCtrl">
+			고객목록
+			<ul>
+				<li ng-repeat="customer in customerList">
+					[{{$index + 1}}] 고객이름: {{customer.name}}, 고객나이: {{customer.age}}
+				</li>
+			</ul>
+		</div>
+		<div>
+			18세 미만 고객
+			<ul>
+				<li ng-repeat="youngCuster in youngCusterList">
+					[{{$index + 1}}] 고객이름: {{youngCuster.name}}, 고객나이: {{youngCuster.age}}
+				</li>
+			</ul>
+		</div>
+	<hr />
+	<div>
+		<form name="sampleForm" ng-init="name='철수'">
+			이름: <input type="text" name="name" ng-model="name" ng-maxlength="3" ng-required="true">
+			<span class="error" ng-show="sampleForm.name.$error.required">필수입력</span>
+			<br>
+			핸드폰 번호: <input type="text" name="tel" ng-model="tel" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/">
+			<span class="error" ng-show="sampleForm.tel.$error.pattern">000-0000-0000</span>
+			<br>
+			<p>사용자 정보 : {{name}}/ {{tel}}</p>
+			<p>sampleForm.name.$valid = {{sampleForm.name.$valid}}</p>
+			<p>sampleForm.name.$error = {{sampleForm.name.$error}}</p>
+			<p>sampleForm.tel.$valid = {{sampleForm.tel.$valid}}</p>
+			<p>sampleForm.tel.$error = {{sampleForm.tel.$error}}</p>
+			<p>sampleForm.$valid = {{sampleForm.$valid}}</p>
+			<p>sampleForm.$error.required = {{!!sampleForm.$error.required}}</p>
+		</form>
+	</div>
+	<hr />
+	<div>
+		<form name="sampleForm" ng-init="value1=true; value2='No';">
+			선택 1: <input type="checkbox" name="check1" ng-model="value1">
+			<br>
+			선택 2: <input type="checkbox" name="check2" ng-model="value2" ng-true-value="'Yes'" ng-false-value="'No'">
+			<br>
+			<p>선택 1의 바인딩된 값 : {{value1}}</p>
+			<p>선택 2의 바인딩된 값 : {{value2}}</p>
+		</form>
+	</div>
+	<hr />
+
+	<div ng-controller="selectCtrl">
+		<form name="myRouteForm">
+			<div>
+				출발 국가:
+				<select ng-model="depCountry" ng-options="country.name for country in countryList" ng-required="true">
+	                <option value="">선택하여 주세요</option>
+	            </select>
+			</div>
+			<div>
+				경유 국가:
+				<select ng-model="viaCountry" ng-options="country.name as country.name for country in countryList" ng-required="true">
+					<option value="">선택하여 주세요</option>
+				</select>
+			</div>
+			<div>
+				도착 국가(대륙 그룹별):
+				<select ng-model="arrCountry" ng-options="country.name group by country.continent for country in countryList" ng-required="true">
+					<option value="">선택하여 주세요</option>
+				</select>
+			</div>
+		</form>
+		<div>
+			<p>출발 국가: {{depCountry.name}}</p>
+			<p>경유 국가: {{viaCountry}}</p>
+			<p>도착 국가: {{arrCountry.name}}</p>
+		</div>
+		<div ng-show="myRouteForm.$invalid">
+			출발 국가와 도착 국가는 필히 선택해주세요.
+		</div>
+	</div>
+	<hr />
+	<div class="status_style">
+		<form name="sampleForm" ng-init="name='철수'">
+			이름 : <input type="text" name="name" ng-model="name" ng-maxlength="3" ng-required="true">
+			핸드폰 번호 : <input type="text" name="tel" ng-model="tel" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/">
+		</form>
+	</div>
+	<hr />
+	
+	<div ng-controller="mainCtrl2">
+		<div>
+			<div class="box_black" ng-click="handleEvt('박스 클릭 됐다')">click</div>
+			<div class="box_black" ng-mousedown="handleEvt('박스 mousedown 이벤트')">mousedown</div>
+			<div class="box_black" ng-mouseenter="handleEvt('박스 mouseenter 이벤트')">mouseenter</div>
+			<div class="box_black" ng-mousemove="handleEvt('박스 mousemove 이벤트')">mousemove</div>
+			change : <input type="text" ng-model="inputText" ng-change="handleEvt('입력박스의 값이 변경되었다.')" name="">
+			keydown : <input type="text" ng-model="inputText2" ng-keydown="handleEvt($event.keyCode+'키코드 눌러짐')" name="">
+		</div>
+		<div>
+			<p>{{message}} {{eventCnt}}</p>
+		</div>
+	</div>
+	<hr />
+	<div ng-init="fruitList = ['apple', 'banna', 'tomato', 'lemon', 'grape']">
+		<ul>
+			<li ng-repeat="fruit in fruitList" ng-class="'{{fruit}}'">{{fruit}}</li>
+		</ul>
+		<ul>
+			<li ng-repeat="fruit in fruitList" ng-class="{'even' : {{$index%2==0}}}">{{fruit}}</li>
+		</ul>
+	</div>
+	<hr />
+	<div ng-controller="mainCtrl3">
+		<div>
+			<div ng-style="bgStyle">{{bgStyle.backgroundColor}}</div>
+			<button ng-click="changeColor('yellow')">색변경</button>
+		</div>
+	</div>
+	<hr />
+</body>
+</html>

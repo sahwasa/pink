@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  
+  <link rel="stylesheet" href="../../app/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <script type="text/javascript" src="../../app/bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="../../app/bower_components/jquery/dist/jquery.min.js"></script>
+  
+  <script type="text/javascript" src="../../app/bower_components/bootstrap/js/tab.js"></script>
+  <script type="text/javascript" src="../../app/bower_components/bootstrap/js/dropdown.js"></script>
+  <!--  
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   -->
+  <script src="twice.js"></script>
+  
+
+   <style type="text/css">
+      .box{
+        width:100px;
+        height:100px;
+      }
+      .red {
+        background-color:red;
+      }
+      .green {
+        background-color:green;
+      }
+      .blue {
+        background-color:blue;
+      }
+      .black {
+        background-color:black;
+      }
+
+      #cssvalid .ng-invalid {
+        border: 3px solid red;
+      }
+      #cssvalid .ng-valid{
+        border: 3px solid green;
+      }
+      #cssvalid .ng-pristin{
+        border-style: solid;
+      }
+      #cssvalid .ng-dirty{
+        border-style: dashed;
+      }
+       
+    </style>
+  
+  <title>Twice Group</title>
+</head>
+
+<body class="well"  ng-app="myApp">
+
+
+<div class="container">
+  <h2>시작하세요 Angular JS sample</h2>
+  <!-- 
+  <p>Click on the Tabs to display the active and previous tab.</p>
+   -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#todo">todo</a></li>
+    <li><a href="#menuList">MenuList</a></li>
+    <li><a href="#repeat">ng-repeat</a></li>
+    <li><a href="#ifswitch">if-switch</a></li>
+     <li><a href="#showhide">showhide</a></li>
+     <li><a href="#ngcontroller">ng-controller</a></li>
+
+      <li role="presentation" class="dropdown">
+        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+          From-directive
+          <span class="caret"></span>
+        </a>
+        <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#input">input</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#checkbox">checkbox</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#select">select</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#cssvalid">cssvalid</a></li>
+          <!--
+          <li role="presentation" class="divider"></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Separated link</a></li>
+          -->
+        </ul>
+      </li>
+
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="todo" class="tab-pane fade in active " ng-controller="todoCtrl">
+      <h3>TODO APP</h3>
+      	
+      	<h1>{{ appName }}</h1>
+		  <p>전체 할일 <strong> {{todoList.length}} </strong> 개 / 남은 할 일은 <strong> {{remain()}} </strong>개</p>
+		
+		  <br>
+		  <h4>남은 할일 리스트</h4>
+		  <form action="" name="newItemForm" class="form-inline">
+		    <div class="form-group">
+		      <label class="sr-only" for="newItemText">새로운 할일</label>
+		      <input type="text" class="form-control" name="newItemText" placeholder="새로운 할 일
+		      " ng-model="newTitle">
+		    </div>
+		    <button type="submit" class="btn btn-default" ng-click="addNewTodo(newTitle)">추가</button>
+		
+		  </form>
+		  <ul class="list-unstyled" style="margin-left: 20px">
+		    <li ng-repeat="todo in todoList" class="checkbox">
+		      <input type="checkbox" ng-model="todo.done">{{ todo.title }}
+		    </li>
+		  </ul>
+      	
+      	
+    </div>
+    <div id="menuList" class="tab-pane fade " ng-controller="mainCtrl">
+      <h3>MenuList</h3>
+      
+      <div>
+          <h1>메뉴판</h1>
+          <h2>메뉴 목록</h2>
+          <table>
+           <thead>
+            <tr><th>메뉴</th><th>가격</th><th>갯수</th></tr>
+           </thead>
+           <tbody>
+            <tr ng-repeat="menu in menuList">
+             <td>{{menu.itemName}}</td>
+             <td>{{menu.itemPrice}}</td>
+             <td><input type="text" ng-model="menu.itemCount"></td>
+            </tr>
+           </tbody>
+          </table>        
+          <button ng-click="buy()">구매</button>
+          <h2>구입 가격</h2>
+          <div>
+           가격 : {{totalPrice}}
+          </div>
+     </div>
+      
+    </div>
+    <div id="repeat" class="tab-pane fade">
+      <h3>ng-repeat</h3>
+      
+      
+      <div ng-init="customerList = [{name:'영희', age:25} , {name:'순희', age:28},{name:'희애', age:282}]">
+        고객목록
+        <ul>
+            <li ng-repeat="customer in customerList">
+                 고객이름 : {{customer.name}} , 고객나이 : {{customer.age}}
+            </li>
+        </ul>
+      </div>
+
+      <div ng-init="myFriend={name:'철수', age:25, hobby : '축구'}">
+          내 친구 소개
+          <ul>
+              <li ng-repeat="(x,y) in myFriend">
+               <p> {{x}} : {{y}}</p> 
+              </li>
+          </ul>
+      </div>
+
+
+    </div>
+    <div id="ifswitch" class="tab-pane fade">
+      <h3>switch</h3>
+      
+          <div>
+            <input type="radio" ng-model="color" value="red">  빨간색 <br/>
+            <input type="radio" ng-model="color" value="green"> 녹색 <br/>
+            <input type="radio" ng-model="color" value="blue"> 파란색 <br/>
+
+              <div ng-switch="color">
+                  <div ng-switch-when="red" class="box red"></div>
+                  <div ng-switch-when="green" class="box green"></div>
+                  <div ng-switch-when="blue" class="box blue"></div>
+                  <div ng-switch-default class="box black"></div>
+              </div>
+          </div>
+        
+         <br/>
+         <h3>if</h3>
+          <div>
+             약관에 동의: <input type="checkbox" ng-model="checked" ng-init="checked=false" />
+            <br/>
+            동의하면 다음으로 진행됩니다.
+            <button ng-if="checked">다음</button>
+          </div>
+    </div>
+     
+     <div id="showhide" class="tab-pane fade">
+        <h3>showhide</h3>
+         동의 여부 : <input type="checkbox" ng-model="checked">
+        <br/>
+         
+         <div>
+            <span ng-show="checked">
+              다음으로 진행합니다. <button>계속</button>
+            </span>
+          </div>
+        <div>
+          <span ng-hide="checked">
+            다음으로 진행할 수 없습니다.
+          </span>
+        </div>
+
+     </div>
+
+     <div id="ngcontroller" class="tab-pane fade" ng-controller="customerCtrl"> 
+        <h3>ng-controller</h3>
+        
+           <div>
+           고객 목록
+           <ul>
+            <li ng-repeat="customer in customerList">
+             [{{$index + 1}}] 고객 이름 : {{customer.name}}, 고객 나이 : {{customer.age}}
+            </li>
+           </ul>
+          </div>
+
+          <div>
+           18세 미만 고객
+           <ul>
+            <li ng-repeat="youngCuster in youngCusterList">
+             [{{$index + 1}}] 고객 이름 : {{youngCuster.name}}, 고객 나이 : {{youngCuster.age}}
+            </li>
+           </ul>
+          </div>
+
+
+     </div>
+
+     
+     <div id="input" class="tab-pane fade">
+        <h3>input</h3>
+    
+    
+        <form name="sampleForm" ng-init="name = '철수'">
+            이름 : <input type="text" name="name" ng-model="name"
+                          ng-maxlength="3" ng-required="true">
+            <span class="error" ng-show="sampleForm.name.$error.required">필수입력</span>
+            <br/>
+            핸드폰 번호: <input type="text" name="tel" ng-model="tel" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/" >
+          
+            <span class="error" ng-show="sampleForm.tel.$error.pattern">000-0000-0000</span>
+            <br/>
+            <p>사용자 정보 : {{name}}/{{tel}}</p>
+            <p>sampleForm.name.$valid = {{sampleForm.name.$valid}}</p>
+            <p>sampleForm.name.$error = {{sampleForm.name.$error}}</p>
+            <p>sampleForm.tel.$valid = {{sampleForm.tel.$valid}}</p>
+            <p>sampleForm.tel.$error = {{sampleForm.tel.$error}}</p>
+            <p>sampleForm.$valid = {{sampleForm.$valid}}</p>
+            <p>sampleForm.$error.required = {{!!sampleForm.$error.required}}</p>
+        </form>
+       
+     </div>
+
+
+      <div id="checkbox" class="tab-pane fade">
+        <h3>checkbox</h3>
+        
+        <form name="sampleForm" ng-init="value1 = true; value2 = '좋다';">
+			선택 1: <input type="checkbox" name="check1" ng-model="value1">
+			<br/>
+			선택 2: <input type="checkbox" name="check2" ng-model="value2" ng-true-value="'좋다'" ng-false-value="'싫다'">
+			<br/>
+			<p>선택1의 바인딩된 값 : {{value1}}</p>
+			<p>선택2의 바인딩된 값 : {{value2}}</p>         
+        </form>
+        
+        
+     </div>
+
+
+     <div id="select" class="tab-pane fade">
+        <h3>select</h3>
+        
+        <div ng-init="countryList = [{name:'한국', code:'KR', continent:'아시아'},
+        	{name:'일본', code:'jr', continent:'아시아'}, {name:'미국', code:'en', continent:'북미'}]">
+        	<form name="myRouteForm">
+        		<div>
+        			출발국바:
+        			<select ng-model="depCountry" ng-options="country.name for country in countryList" ng-required="true">
+        				<option value="">선택하여 주세요</option>
+        			</select>
+        		</div>
+        		<div>
+        			경유국가:
+        			<select ng-model="viaCountry" ng-options="country.name as country.name for country in countryList">
+        				<option value="">선택하여 주세요</option>
+        			</select>
+        		</div>
+        		<div>
+        			도착국가(대륙 그룹별):
+        			<select ng-model="arrCountry" ng-options="country.name group by country.continent for country in countryList" ng-required="true">
+        				<option value="">선택하여 주세요</option>
+        			</select>
+        		</div>
+        	</form>
+        	<div>
+        		<p>출발 국가: {{depCountry.name}}</p>
+        		<p>경유 국가: {{viaCountry}}</p>
+        		<p>도착 국가: {{arrCountry.name}}</p>
+        	</div>
+        	<div ng-show="myRouteForm.$invalid">
+        		출발 국가와 도착 국가는 필히 선택해주세요.
+        	</div>
+      </div>
+
+  </div>
+  <div id="cssvalid" class="tab-pane fade">
+  	<h3>cssvalid</h3>
+	
+	<form name="sampleForm" ng-init="name = '철수'">
+		이름 : <input type="text" name="name" ng-model="name" ng-maxlength="3" ng-required="true">
+		핸드폰 번호: <input type="text" name="tel" ng-model="tel" ng-pattern="/^d{3}-\d{3,4}-\d{4}$/">
+	</form>
+          
+  </div>  <!-- tan end -->
+  <hr>
+   
+    <!--
+    <p class="act"><b>Active Tab</b>: <span></span></p>
+    <p class="prev"><b>Previous Tab</b>: <span></span></p>
+    -->     
+</div>
+
+
+
+
+
+  
+ 
+
+
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Su">
+  <title>beeer</title>
+  <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./beeer.css">
+</head>
+<body class="well">
+  <header>
+    <aside>
+      <nav>
+        <ul class="snb">
+          <li class="home on"><a href="#">Angular</a></li>
+          <li class="sub-list">
+            <a href="#">예제 코드</a>
+            <ul class="snb-sub">
+              <li><a href="#">TODO App</a></li>
+              <li><a href="#">TODO App - 2</a></li>
+              <li><a href="#">표현식</a></li>
+              <li><a href="#">데이터 바인딩</a></li>
+              <li><a href="#">반복 지시자</a></li>
+              <li><a href="#">조건 지시자</a></li>
+              <li><a href="#">콘트롤러 지시자</a></li>
+              <li><a href="#">폼/입력 지시자</a></li>
+              <li><a href="#">이벤트 처리 지시자</a></li>
+              <li><a href="#">클래스 지시자<br>스타일 지시자</a></li>
+              <li><a href="#">북마크</a></li>
+              <li><a href="#">$scope 계층구조</a></li>
+              <li><a href="#">사용자 정의<br>이벤트 처리</a></li>
+            </ul>
+          </li>
+          <li class="end-list"><a href="#">Index</a></li>
+        </ul>
+      </nav>
+    </aside>
+  </header>
+  <article>
+    <section>
+      <h2 class="title">시작하세요 Angular JS 프로그래밍</h2>
+      <p class="g-name">beeer</p>
+    </section>
+    <section ng-controller="todoCtrl">
+      <div class="content">
+        <h2 class="chapter">{{appName}}</h2>
+        <div class="view-con">
+          <p>전체 할 일 <strong>{{todoList.length}}</strong>개 / 남은 할인을 <strong>{{remain()}}</strong>개 [<a href="#" ng-click="archive()">보관하기</a>]</p>
+          <ul class="list-unstyled">
+            <li class="checkbox" ng-repeat="todo in todoList">
+              <input type="checkbox" ng-model="todo.done">{{todo.title}}
+            </li>
+          </ul>
+          <!--
+          <ul class="list-unstyled">
+            <li class="checkbox"><input type="checkbox">AngularJS 독서</li>
+            <li class="checkbox"><input type="checkbox">개인 프로젝트 구성</li>
+          </ul>
+          -->
+
+          <form name="newItemForm" class="form-inline" action="">
+            <div class="form-group">
+              <label class="sr-only" for="newItemText">새로운 할 일</label>
+              <input type="text" class="form-control" name="newItemText" id="newItemText" placeholder="새로운 할 일" ng-model="newTitle">
+            </div>
+            <button type="button" class="btn btn-default" ng-click="addNewTodo(newTitle)">추가</button>
+          </form>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#todo">code view</button>
+        <!-- Modal -->
+        <div id="todo" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p data-theme-id="0" data-slug-hash="oLZqZm" data-default-tab="result" data-user="Su__" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Su__/pen/oLZqZm/">todo</a> by Su-hyun (<a href="http://codepen.io/Su__">@Su__</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section ng-controller="todo2Ctrl">
+      <div class="content">
+        <h2 class="chapter">{{appName}}</h2>
+        <div class="view-con">
+          <ul class="list-unstyled">
+            <li>
+              <!--
+              <form ng-submit="addTodo(newTodo)" action="">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="newTodo" placeholder="Type todos">
+                  <span class="input-group-btn">
+                   <button class="btn btn-success" type="submit">Add</button>
+                  </span>
+                </div>
+              </form>
+              -->
+              <form action="">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="newTodo" placeholder="Type todos">
+                  <span class="input-group-btn">
+                   <button class="btn btn-success" type="button" ng-click="addTodo(newTodo)">Add</button>
+                  </span>
+                </div>
+              </form>
+
+            </li>
+          </ul>
+
+          <!--<ul class="list-unstyled" ng-repeat="todo in todoList track by $index">-->
+          <ul class="list-unstyled" ng-repeat="todo in todos | filter:statusFilter">
+            <li class="todo-item">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" aria-label="..." ng-model="todo.completed">
+                </span>
+                <input type="text" class="form-control" aria-label="..." ng-model="todo.title">
+                <div class="input-group-btn">
+                 <button type="submit" class="btn btn-danger" ng-click="remove(todo.id)">Remove</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" ng-click="status='completed'">Completed</button>
+            <button type="button" class="btn btn-default" ng-click="status='active'">Active</button>
+            <button type="button" class="btn btn-default" ng-click="status=''">All</button>
+            <button type="button" class="btn btn-default" ng-click="clearCompleted()">Clear Completed</button>
+          </div>
+
+          <pre>{{todos | json}}</pre>
+        </div>
+      </div>
+    </section>
+    <section ng-init="person={ name : '재도', favorite : ['사과','딸기','포도']}">
+      <div class="content">
+        <h2 class="chapter">hello {{person.name}}</h2>
+        <div class="view-con">
+          <ul ng-repeat="fruit in person.favorite">
+            <li><a href="#{{fruit}}">{{fruit}}</a></li>
+          </ul>
+          <p>좋아하는 과일의 갯수 : {{numberOfFavorite = person.favorite.length}}</p>
+          <p>과일 갯수 * $100 = {{numberOfFavorite * 100 | currency}}</p>
+          <p>재도가 맞나요 {{person.name == '재도'}}</p>
+          <p>좋아하는 과일 수가 4개보다 많나요 {{numberOfFavorite > 4}}</p>
+          <p>scope에 없는 객체 접근 하면 ? {{cat.type.name}}</p>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#person">code view</button>
+        <!-- Modal -->
+        <div id="person" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p data-theme-id="0" data-slug-hash="BzdJVY" data-default-tab="html,result" data-user="Su__" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Su__/pen/BzdJVY/">표현식</a> by Su-hyun (<a href="http://codepen.io/Su__">@Su__</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section ng-controller="menuCtrl">
+      <div class="content">
+        <h2 class="chapter">양방향 데이터 바인딩 예제</h2>
+        <div class="view-con">
+          <h3>{{appName}}</h3>
+          <p>메뉴 목록</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>메뉴</th>
+                <th>가격</th>
+                <th>갯수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="menu in menuList">
+                <td>{{menu.itemName}}</td>
+                <td>{{menu.itemPrice}}</td>
+                <td><input type="text" ng-model="menu.itemCount"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button ng-click="buy()">구매</button>
+          <h3>구입 가격</h3>
+          <div class="panel-footer text-right">
+            가격 : {{totalPrice}}
+          </div>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#binding">code view</button>
+        <!-- Modal -->
+        <div id="binding" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p data-theme-id="0" data-slug-hash="zBdpLY" data-default-tab="html,result" data-user="Su__" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Su__/pen/zBdpLY/">menuList</a> by Su-hyun (<a href="http://codepen.io/Su__">@Su__</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">반복적인 데이터 표현을 위한 템플릿</h2>
+        <div class="view-con">
+          <h3>ng-repeat</h3>
+          <div class="panel-danger" ng-init="customerList = [{ name : '영희', age : 25}, { name : '순희', age : 28}]">
+            고객 목록
+            <ul>
+              <li ng-repeat="customer in customerList">
+                [{{$index + 1}}] 고객 이름 : {{customer.name}}, 고객 나이 : {{customer.age}}
+              </li>
+            </ul>
+          </div>
+          <div class="panel-footer" ng-init="myFriend = { name : '철수', age : 25, hobby : '축구'}">
+            내 친구 소개
+            <ul>
+              <li ng-repeat="(attr, value) in myFriend">
+                <p>{{attr}} : {{value}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#ngRepeat">code view</button>
+        <!-- Modal -->
+        <div id="ngRepeat" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p data-theme-id="0" data-slug-hash="OXjzoQ" data-default-tab="html,result" data-user="Su__" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Su__/pen/OXjzoQ/">ng-repeat</a> by Su-hyun (<a href="http://codepen.io/Su__">@Su__</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">조건적인 데이터 표현을 위한 템플릿</h2>
+        <div class="view-con">
+          <ul class="row default">
+            <li class="col-sm-4">
+              <h3>ng-switch</h3>
+              <div>
+                <input type="radio" ng-model="color" value="red"> 빨간색<br>
+                <input type="radio" ng-model="color" value="green"> 녹색<br>
+                <input type="radio" ng-model="color" value="blue"> 파란색<br>
+                <div ng-switch="color">
+                  <div ng-switch-when="red" class="box red"></div>
+                  <div ng-switch-when="green" class="box green"></div>
+                  <div ng-switch-when="blue" class="box blue"></div>
+                  <div ng-switch-default class="box black"></div>
+                </div>
+              </div>
+            </li>
+            <li class="col-sm-4">
+              <h3>ng-if</h3>
+              <div>
+                  약관에 동의 : <input type="checkbox" ng-model="checkedIf" ng-init="checkedIf=false">
+                  <br>
+                  동의하면 다음으로 진행됩니다
+                  <button class="btn btn-success btn-block" ng-if="checkedIf">다음</button>
+              </div>
+            </li>
+            <li class="col-sm-4">
+              <h3>ng-show / ng-hide</h3>
+              <div>
+                동의 여부 : <input type="checkbox" ng-model="checkedShow">
+                <br>
+                <div>
+                  <span ng-show="checkedShow">
+                    다음으로 진행 합니다. <button class="btn btn-success btn-xs">계속</button>
+                  </span>
+                </div>
+                <div>
+                  <span ng-hide="checkedShow">
+                    다음으로 진행 할 수 없습니다.
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#ngIf">code view</button>
+        <!-- Modal -->
+        <div id="ngIf" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p data-theme-id="0" data-slug-hash="jALkKE" data-default-tab="html,result" data-user="Su__" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Su__/pen/jALkKE/">조건 지시자</a> by Su-hyun (<a href="http://codepen.io/Su__">@Su__</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">비지니스 로직 처리를 위한 템플릿</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#ngControl">code view</button>
+        <!-- Modal -->
+        <div id="ngControl" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">폼과 유효성 검사를 위한 템플릿</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#validity">code view</button>
+        <!-- Modal -->
+        <div id="validity" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">이벤트 처리를 위한 템플릿</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#event">code view</button>
+        <!-- Modal -->
+        <div id="event" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">CSS 클래스/스타일 동적으로 처리하기 위한 템플릿</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#cssStyle">code view</button>
+        <!-- Modal -->
+        <div id="cssStyle" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">MVC - 모델, 뷰, 컨트롤러</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#ngMVC">code view</button>
+        <!-- Modal -->
+        <div id="ngMVC" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">$scope의 계층구조</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#rootScope">code view</button>
+        <!-- Modal -->
+        <div id="rootScope" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="content">
+        <h2 class="chapter">$scope에서 사용자 정의 이벤트 처리</h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#userEvent">code view</button>
+        <!-- Modal -->
+        <div id="userEvent" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--
+    <section>
+      <div class="content">
+        <h2 class="chapter"> text </h2>
+        <div class="view-con">
+          coming soon
+        </div>
+
+        Trigger the modal with a button
+        <button type="button" class="btn btn-default btn-md code" data-toggle="modal" data-target="#none">code view</button>
+        Modal
+        <div id="none" class="modal fade" role="dialog">
+          <div class="modal-dialog custom">
+            Modal content
+            <div class="modal-content">
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
+    <section>
+      <div class="content">
+        <h2 class="chapter">Index</h2>
+        <div class="view-con">
+          contents write
+        </div>
+      </div>
+    </section>
+  </article>
+  <script type="text/javascript" data-main="./appConfig" src="../../lib/requirejs/require.js" charset="UTF-8"></script>
+</body>
+</html>

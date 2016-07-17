@@ -1,0 +1,14 @@
+* {font-family: Nanum Gothic;padding: 0;margin: 0;}
+h1 { width: 26%;padding: 3px 10px;border: 1px solid #000;color: #000;text-align: left;font-size: 20px;font-weight: normal;border-radius: 5px;}
+h1:hover{border: 1px solid gray;background: #000;color: #fff;}
+hr {border: 1px dashed #d4d4d4;}
+ul {list-style: none;}
+.nav ul {list-style-type: circle;}
+.nav ul li a{text-decoration: none;color: #000;}
+.checkbox input[type=checkbox] {position: static;margin-left: 0;}
+
+.box {display:block;width:100px;height:100px;}
+.red{background-color:red;}
+.green{background-color:green;}
+.blue{background-color:blue;}
+.black{background-color:black;}

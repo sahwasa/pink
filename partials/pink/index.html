@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html ng-app="projectWeb">
+  <head>
+    <meta charset="utf-8">
+    <title>TODO App Demo</title>
+    <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="../../lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-cookies.js"></script>
+    <!-- <script src="http://code.angularjs.org/1.0.0rc10/angular-cookies-1.0.0rc10.js"></script> -->
+  </head>
+  <body>
+  <div id="wrap">
+    <h1 class="page-header">PINK :-D</h1>
+    <h3>member <small>가나다순입니다.</small></h3>
+    <ul class="list-group">
+      <li class="list-group-item">박성현</li>
+      <li class="list-group-item list-group-item-danger">반미선 <span class="badge">여자라서 조장</span></li>
+      <li class="list-group-item">윤봉태</li>
+      <li class="list-group-item">장지원</li>
+    </ul>
+
+    <div class="nav">
+      <h3>네비게이션</h3>
+      <a href="#wrap"><span class="glyphicon glyphicon-triangle-top"></span> Top</a>
+      <a href="#link01" class="label label-primary">todoApp</a>
+      <a href="#link02" class="label label-primary">menuList</a>
+      <a href="#link03" class="label label-primary">ng-repeat</a>
+      <a href="#link04" class="label label-primary">ng-switch</a>
+      <a href="#link05" class="label label-primary">ng-if</a>
+      <a href="#link06" class="label label-primary">ng-show / hide</a>
+      <a href="#link07" class="label label-primary">ng-controller</a>
+      <a href="#link08" class="label label-primary">폼/입력 지시자</a>
+      <a href="#link09" class="label label-primary">checkbox</a>
+      <a href="#link10" class="label label-primary">select</a>
+      <a href="#link11" class="label label-primary">css class 유효성 검증결과 표현</a>
+      <a href="#link12" class="label label-primary">mouse, keyboard 이벤트</a>
+      <a href="#link13" class="label label-primary">css, class동적처리</a>
+      <a href="#link14" class="label label-primary">MVC</a>
+      <a href="#link15" class="label label-primary">Module</a>
+      <a href="#link16" class="label label-primary">Directive</a>
+      <a href="#link17" class="label label-primary">Transclude</a>
+
+    </div>
+
+    <!-- todoApp -->
+    <div id="link01" class="page-header">
+      <h1><small></small>todoApp</h1>
+    </div>
+    <div class="well" ng-controller="todoCtrl">
+      <h2>{{appName}}</h2>
+      <p>
+        전체 할 일 <strong>{{todoList.length}}</strong>개 / 남은 할일은 <strong>{{remain()}}</strong>개
+        [ <a href="" ng-click="archive()">보관하기</a> ]
+      </p>
+      <ul class="list-unstyled" style="padding-left:20px;">
+        <li class="checkbox" ng-repeat="item in todoList">
+          <input type="checkbox" ng-model="item.done" id="{{item.title}}">
+          <label for="{{item.title}}">{{item.title}}</label>
+        </li>
+      </ul>
+      <form class="form-inline" name="newItemForm" action="index.html">
+        <div class="form-group">
+          <label for="newItemText" class="sr-only">새로운 할 일</label>
+          <input type="text" class="form-control" name="newItemText" placeholder="새로운 할 일" value="" ng-model="newTitle">
+        </div>
+        <button type="button" class="btn btn-default" name="button" ng-click="addNewItem()">추가</button>
+      </form>
+    </div>
+    <!-- todoApp__e -->
+
+    <!-- menulist -->
+    <div id="link02" class="page-header">
+      <h1><small></small>menuList</h1>
+    </div>
+    <div class="panel panel-info" ng-controller="menuCtrl">
+      <div class="panel-heading text-center">
+        <h2>메뉴판</h2>
+      </div>
+      <div class="panel-body">
+        <h3>메뉴목록</h3>
+        <table class="table table-striped">
+          <tr>
+            <th scope="col">메뉴</th>
+            <th scope="col">가격</th>
+            <th scope="col">갯수</th>
+          </tr>
+          <tr ng-repeat="menus in item">
+            <td width="40%">{{menus.menu}}</td>
+            <td width="30%">{{menus.cost}}</td>
+            <td><input type="text" class="form-control input-sm" ng-model="menus.count" /></td>
+          </tr>
+          <tr class="info">
+            <td colspan="3"><button ng-click="buy()" class="btn btn-primary btn-sm pull-right">구 매 하 기</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="panel-footer text-right">
+        <h3>총 액 : {{totalPrice}}</h3>
+      </div>
+    </div>
+    <!-- menulist__e -->
+
+    <!-- ng-repeat -->
+    <div id="link03" class="page-header">
+      <h1><small></small>ng-repeat</h1>
+    </div>
+    <div ng-controller="customer">
+
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h4 class="panel-title">&lt; any ng-repeat="변수명 in 표현식" &gt;</h4>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group-item-text">
+            <li>
+              변수명 = 배열요소를 반복문 내부에서 참조할 때 사용
+            </li>
+            <li>
+              표현식 = $scope내 순환할 대상
+            </li>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <table class="table">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">이름</th>
+              <th scope="col">나이</th>
+              <th scope="col">첫번째?</th>
+              <th scope="col">중간?</th>
+              <th scope="col">마지막?</th>
+              <th scope="col">짝수?</th>
+              <th scope="col">홀수?</th>
+            </tr>
+            <tbody>
+              <tr ng-repeat="cus in customers">
+                <td>{{$index+1}}</td>
+                <td>{{cus.name}}</td>
+                <td>{{cus.age}}</td>
+                <td>{{$first}}</td>
+                <td>{{$middle}}</td>
+                <td>{{$last}}</td>
+                <td>{{$even}}</td>
+                <td>{{$odd}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="bg-danger">
+            var customers=[
+              {name:'김수현',age:'29'},
+              {name:'유아인',age:'31'},
+              {name:'주원',age:'30'}
+            ];
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h4 class="panel-title">&lt; any ng-repeat="(key 변수명, value 변수명) in 표현식" &gt;</h4>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group-item-text">
+            <li>
+              객체 같은 데이터를 순환할 때 사용
+            </li>
+            <li>
+              key 변수명 = 반복문 내부 객체의 key를 참조하는 변수
+            </li>
+            <li>
+              value 변수명 = 참조 value의 변수명
+            </li>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <ul class="list-unstyled">
+            <li ng-repeat="(attr, value) in customObj">{{attr}} : {{value}}</li>
+          </ul>
+          <div class="bg-danger">
+            var customObj={
+              name:'송중기',
+              age:'32',
+              job:'배우'
+            };
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h4 class="panel-title">&lt; any ng-repeat="변수명 in 표현식 track by 표현식" &gt;</h4>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group-item-text">
+            <li>
+              변수명 = 배열요소를 반복문 내부에서 참조할 때 사용
+            </li>
+            <li>
+              표현식 = $scope내 순환할 대상
+            </li>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <b>track by를 지정하지 않았을 때</b>
+          <ul class="list-unstyled">
+            <li ng-repeat="name in star">
+              <input type="text" ng-model="name">
+            </li>
+          </ul>
+          <p>ng-init:{{star}}</p>
+          <b>$index로 연결</b>
+          <ul class="list-unstyled">
+            <li ng-repeat="name in star">
+              <input type="text" ng-model="star[$index]">
+            </li>
+          </ul>
+          <p>ng-init:{{star}}</p>
+          <b>track by 지정</b>
+          <ul class="list-unstyled">
+            <li ng-repeat="name in star track by $index">
+              <input type="text" ng-model="star[$index]">
+            </li>
+          </ul>
+          <p>ng-init:{{star}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- ng-repeat__e -->
+
+    <!-- ng-switch-->
+    <div id="link04" class="page-header">
+      <h1><small></small>ng-switch</h1>
+    </div>
+    <input type="radio" ng-model="color" value="red" name="colors" id="red"> <label for="red">빨강</label>
+    <input type="radio" ng-model="color" value="green" name="colors" id="green"> <label for="green">초록</label>
+    <input type="radio" ng-model="color" value="blue" name="colors" id="blue"> <label for="blue">파랑</label>
+    <div ng-switch="color" class="box_wrap">
+      <div ng-switch-when="red" class="bg-danger">빨강</div>
+      <div ng-switch-when="green" class="bg-success">초록</div>
+      <div ng-switch-when="blue" class="bg-primary">파랑</div>
+      <div ng-switch-default>기본값</div>
+    </div>
+    <!-- ng-switch__e -->
+
+    <!-- ng-if-->
+    <div id="link05" class="page-header">
+      <h1><small></small>ng-if</h1>
+    </div>
+    <input type="checkbox" id="agree" ng-model="agree" checked="false"> <label for="agree">약관에 동의</label>
+    <p>동의하면 다음으로 진행됩니다.</p>
+    <button ng-if="agree" class="btn btn-primary">다음</button>
+    <!-- ng-if__e -->
+
+    <!-- ng-show / hide -->
+    <div id="link06" class="page-header">
+      <h1><small></small>ng-show / hide </h1>
+    </div>
+    <input type="checkbox" id="agree2" ng-model="agree2" checked="false"> <label for="agree2">약관에 동의</label>
+    <button class="btn btn-default" ng-show="agree2">다음</button>
+    <p ng-hide="agree2">약관에 동의해주세요.</p>
+    <!-- ng-show / hide __e -->
+
+    <!-- ng-controller -->
+    <div id="link07" class="page-header">
+      <h1><small></small>ng-controller</h1>
+    </div>
+    <div ng-controller="customerCtrl">
+    	<div>
+    		고객 목록
+    	</div>
+    		<ul>
+    			<li ng-repeat="customer in customerList">
+    				[{{$index +1}} 고객 이름 : {{customer.name}}, 고객 나이 : {{customer.age}}]
+    			</li>
+    		</ul>
+    	<div>
+    		18세 미만 고객
+    		<ul>
+    			<li ng-repeat="youngCustomer in youngCusterList">
+    				[{{$index +1}} 고객 이름 : {{youngCustomer.name}}, 고객 나이 : {{youngCustomer.age}}]
+    			</li>
+    		</ul>
+    	</div>
+    </div>
+    <!-- ng-controller__e -->
+
+    <!-- form -->
+    <div id="link08" class="page-header">
+      <h1><small></small>폼/입력 지시자</h1>
+    </div>
+    <div ng-controller="formValidator">
+    	<form name="pinkForm" ng-init="name='핑크'" action="">
+    		<h3>93 ~ 95 표</h3>
+    		이름 : <input type="text" name="name" ng-model="name" ng-maxlength="3" ng-required="true">
+    		<span class="error" ng-show="pinkForm.name.$error.required">필수입력</span>
+    		<br/>
+
+    		핸드폰 번호 : <input type="text" name="tel" ng-model="tel" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/">
+    		<span class="error" ng-show="pinkForm.tel.$error.pattern">000-0000-0000</span>
+    		<br/>
+
+    		<p>사용자 정보 : {{name}} / {{tel}} </p>
+    		<p>pinkForm.name.$valid 	= {{pinkForm.name.$valid}}</p>
+    		<p>pinkForm.name.$error 	= {{pinkForm.name.$error}}</p>
+    		<p>pinkForm.tel.$valid 		= {{pinkForm.tel.$valid}}</p>
+    		<p>pinkForm.tel.$error 		= {{pinkForm.tel.$error}}</p>
+    		<p>pinkForm.$valid			= {{pinkForm.$valid}}</p>
+    		<p>pinkForm.$error.required = {{pinkForm.$error.required}}</p>
+
+    		<h3>표 2.1</h3>
+    		<p>이름 속성 : $pristine 			= {{pinkForm.name.$pristine}}</p>
+    		<p>이름 속성 : $dirty 			= {{pinkForm.name.$dirty}}</p>
+    		<p>이름 속성 : $valid 			= {{pinkForm.name.$valid}}</p>
+    		<p>이름 속성 : $invalid 			= {{pinkForm.name.$invalid}}</p>
+    		<p>이름 속성 : $error 			= {{pinkForm.name.$error}}</p>
+
+        <!-- <h3>표 2.2</h3>
+    		<p>이름 속성 : $viewValue 			= {{tel.name.$viewValue}}</p>
+    		<p>이름 속성 : $modelValue 			= {{pinkForm.name.$dirty}}</p>
+    		<p>이름 속성 : $parsers 			= {{pinkForm.name.$valid}}</p>
+    		<p>이름 속성 : $formatters 			= {{pinkForm.name.$invalid}}</p>
+    		<p>이름 속성 : $viewChangeListeners 			= {{pinkForm.name.$error}}</p>
+        <p>이름 속성 : $error 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $pristine 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $dirty 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $valid 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $invalid 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $render() 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $setValidity(validationErrorKey,isValid) 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $isEmpty 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $setPristine 			= {{pinkForm.name.$invalid}}</p>
+        <p>이름 속성 : $setViewValue(value) 			= {{pinkForm.name.$invalid}}</p> -->
+    	</form>
+    </div>
+    <!-- form__e -->
+
+
+    <!-- checkbox:97p~104p -->
+    <div id="link09" class="page-header">
+      <h1><small></small>체크박스 타입</h1>
+    </div>
+    <form name="sampleForm" ng-init="value1 = true; value2 = '좋다';">
+      선택 1 : <input type="checkbox" name="check1" ng-model="value1"><br />
+      선택 2 : <input type="checkbox" name="check2" ng-model="value2" ng-true-value="'좋다'" ng-false-value="'싫다'"><br />
+      <p>선택1의 바인딩된 값 : {{value1}}</p>
+      <p>선택2의 바인딩된 값 : {{value2}}</p>
+    </form>
+    <!-- checkbox:97p~104p__e -->
+
+    <!-- select -->
+    <div id="link10" class="page-header">
+      <h1><small></small>&lt;select&gt; 요소 </h1>
+    </div>
+    <div ng-init="countryList = [{name:'한국', code:'KR', continent:'아시아'},
+    {name:'일본', code:'jr', continent:'아시아'},
+    {name:'미국', code:'en', continent:'북미'}]">
+      <form name="myRouteForm">
+        <div>
+          출발 국가:
+          <select ng-model="depCountry" ng-options="country.name for country in countryList" ng-required="true">
+            <option value="">선택하여 주세요</option>
+          </select>
+        </div>
+        <div>
+          경유 국가:
+          <select ng-model="viaCountry" ng-options="country.name as country.name for country in countryList" ng-required="true">
+            <option value="">선택하여 주세요</option>
+          </select>
+        </div>
+        <div>
+          도착 국가(대륙 그룹별):
+          <select ng-model="arrCountry" ng-options="country.name group by country.continent for country in countryList" ng-required="true">
+            <option value="">선택하여 주세요</option>
+          </select>
+        </div>
+      </form>
+      <div>
+        <p>출발 국가: {{depCountry.name}}</p>
+        <p>경유 국가: {{viaCountry}}</p>
+        <p>도착 국가: {{arrCountry.name}}</p>
+      </div>
+      <div ng-show="myRouteForm.$invalid">
+        출발 국가와 도착 국가는 필히 선택해주세요.
+      </div>
+    </div>
+    <!-- select__e -->
+
+    <!-- css_class -->
+    <div id="link11" class="page-header">
+      <h1><small></small>CSS 클래스로 유효성 검증 결과 표현</h1>
+    </div>
+    <form name="sampleForm" ng-init="name = '철수'">
+      이름 : <input type="text" name="name" ng-model="name" ng-maxlength="3" ng-required="true">
+      핸드폰 번호: <input type="text" name="tel" ng-model="tel" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/">
+    </form>
+    <!-- css_class:97p~104p__e -->
+
+    <!-- mouse_keyboard_evt -->
+    <div id="link12" class="page-header">
+      <h1><small></small>mouse, keyboard 이벤트</h1>
+    </div>
+  	<div ng-controller="evtCtrl">
+   		<ul class="list01">
+   			<li>
+  	 			<div>
+  					<div ng-click="handleEvt('click 이벤트')" class="box01"></div>
+  				</div>
+  				<p>click</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-dbclick="handleEvt('dbclick 이벤트')" class="box01"></div>
+  				</div>
+  				<p>dbclick</p>
+   			</li>
+   			<li>
+   				<div>
+  					<input ng-model="inputText1" ng-keydown="handleEvt('keydown 이벤트, 키코드 : '+$event.keyCode)" type="text">
+  				</div>
+  				<p>keydown</p>
+   			</li>
+   			<li>
+   				<div>
+  					<input ng-model="inputText2" ng-keypress="handleEvt('keypress 이벤트, 키코드 : '+$event.keyCode)" type="text">
+  				</div>
+  				<p>keypress</p>
+   			</li>
+   			<li>
+   				<div>
+  					<input ng-model="inputText3" ng-keyup="handleEvt('keyup 이벤트, 키코드 : '+$event.keyCode)" type="text">
+  				</div>
+  				<p>keyup</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mousedown="handleEvt('mousedown 이벤트')" class="box01"></div>
+  				</div>
+  				<p>mousedown</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mouseenter="handleEvt('mouseenter 이벤트')"  class="box01"></div>
+  				</div>
+  				<p>mouseenter</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mouseleave="handleEvt('mouseleave 이벤트')" class="box01"></div>
+  				</div>
+  				<p>mouseleave</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mousemove="handleEvt('mousemove 이벤트')" class="box01"></div>
+  				</div>
+  				<p>mousemove</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mouseover="handleEvt('mouseover 이벤트')" class="box01"></div>
+  				</div>
+  				<p>mouseover</p>
+   			</li>
+   			<li>
+   				<div>
+  					<div ng-mouseup="handleEvt('mouseup 이벤트')" class="box01"></div>
+  				</div>
+  				<p>mouseup</p>
+   			</li>
+   			<li>
+   				<div>
+  					<input ng-model="inputText4" ng-change="handleEvt('change 이벤트')" type="text">
+  				</div>
+  				<p>change</p>
+   			</li>
+   			<li>
+   				<div>
+  					<input ng-model="inputText5" ng-blur="handleEvt('blur 이벤트')" type="text">
+  				</div>
+  				<p>blur</p>
+   			</li>
+   		</ul>
+   		<p>{{mes}} <br>count : {{eventCnt}}</p>
+    </div>
+    <!-- mouse_keyboard_evt__e -->
+
+    <!-- css_class -->
+    <div id="link13" class="page-header">
+      <h1><small></small>css, class동적처리</h1>
+    </div>
+    <div ng-controller="css_class">
+   		<div ng-init="colorList=['red','blue','yellow','green','darkgrey']">
+   			<ul>
+   				<li ng-repeat="color in colorList" ng-class="'{{color}}'">{{color}}</li>
+   			</ul>
+   			<ul>
+   				<li ng-repeat="color in colorList" ng-class="{'even':{{$index%2==0}}}">{{color}}</li>
+   			</ul>
+   		</div>
+   		<div>
+   			<div ng-style="bgStyle" class="box01">{{bgStyle.backgroundColor}}</div>
+   			<button type="button" ng-click="changeColor('yellow')">색 변경</button>
+   		</div>
+  	</div>
+    <!-- css_class__e -->
+
+  	<!-- MVC -->
+  	<div id="link14" class="page-header">
+        <h1><small></small>MVC</h1>
+      </div>
+  	<div ng-controller="mvcCtrl">
+  		Model 입력 : <input ng-model="greetingModel"><br>
+  		<h4>Model : {{greetingModel}}</h4>
+  		<br>
+  		<input type="checkbox" ng-model="viewModel"> 발표자료 보기<br>
+  		<div ng-show="viewModel">
+  			<a ng-href="{{twiceMVC}}" target="blank" >MVC TWICE 발표 자료 보러가기</a>
+  		</div>
+  		<br>
+  		<button ng-click="clearModel(greetingModel)">Clear Model Data</button>
+  	</div>
+  	<!-- MVC__e -->
+
+    <!-- module -->
+    <div id="link15" class="page-header">
+      <h1><small></small>Module</h1>
+    </div>
+    <div ng-controller="cookieCtrl">
+      <h2>Cookie 서비스</h2>
+      <p>text key : {{val}}</p>
+      <button type="button" name="button" ng-click="getValue()" class="btn btn-primary">쿠키가져오기</button>
+      <br />
+      <input type="text" ng-model="iV" />
+      <button ng-click="putValue(iV)" class="btn btn-success">쿠키저장</button>
+    </div>
+    <!-- module__e -->
+
+  	<!-- Directive -->
+  	<!-- Directive 이름이 대문자로 끝날 때 동작 X -->
+  	<!-- Directive hello - O, helloPink - O, helloP - X -->
+    <div id="link16" class="page-header">
+      <h1><small></small>Directive</h1>
+    </div>
+    <div>
+  		Directive hellopink - O
+  		<div hellopink name="Pink World"></div>
+  		Directive helloPink - O
+  		<div helloPink name="Pink World"></div>
+  		Directive helloP - X
+  		<div helloP name="Pink World"></div>
+  	</div>
+  	<hr />
+  	<div>
+  		지시자 설정 객체 ex
+  		<div pinkcompile name="directive Compile Object"></div>
+  		<hr>
+  		<div pinkcompile2 name="directive Compile Function"></div>
+  		<hr>
+  		<div pinklink name="directive Link Object"></div>
+  		<hr>
+  		<div pinklink2 name="directive Link Function"></div>
+  	</div>
+  	<!-- Directive__e -->
+
+  	<!-- transclude -->
+   	<div id="link17" class="page-header">
+      <h1><small></small>Transclude</h1>
+    </div>
+    <div ng-controller="transCtrl">
+    	<div>
+    	<panel title="알림" type="alert">
+    		<p>AngularJS는 자바스크립트 웹 애플리케이션을 쉽게 개발하게 도와줍니다.</p>
+    	</panel>
+    	<panel title="공지사항 목록" type="info">
+    		<ul>
+    			<li ng-repeat="notice in noticeList">
+    				<a href="{{notice.url}}">{{notice.text}}</a>
+    			</li>
+    		</ul>
+    	</panel>
+    	</div>
+    </div>
+  	<!-- transclude__e -->
+</div>
+</body>
+</html>

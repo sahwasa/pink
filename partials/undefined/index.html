@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO App Demo</title>
+  <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.min.css"/>
+  <script type="text/javascript" src="../../lib/angular/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    li input, li span + div {
+      display: inline-block;
+    }
+
+    .opt_status {
+      display: inline-block;
+    }
+    .on_complete {
+      display: inline-block;
+      color:#999;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body class="well" ng-controller="todoCtrl">
+<h1>{{appName}}</h1>
+<p>전체 할 일
+  <strong>{{todoList.length}}</strong>개 / 남은 할일은
+  <strong>{{remain()}}</strong>개 [ <a href="" ng-click="archive()">보관하기</a> ]
+</p>
+<ul class="list-unstyled">
+  <li ng-repeat="todo in todoList track by $index" class="checkbox">
+    <input type="checkbox" ng-model="checked" ng-init="checked=todo.done">
+    <span ng-class="{on_complete:todo.done}">{{todo.title}}</span>
+    <div ng-if="checked">
+      <select class="opt_status" ng-model="todo.status" ng-options="item for item in optStatus"
+              ng-change="optChange(todo.status, $index)">
+        <option value=""></option>
+      </select>
+    </div>
+  </li>
+</ul>
+
+<form name="newItemForm" class="form-inline" action="">
+  <div class="form-group">
+    <label class="sr-only" for="newItemText">새로운 할 일</label>
+    <input type="text" class="form-control" name="newItemText" id="newItemText" placeholder="새로운 할 일"
+           ng-model="newTitle">
+  </div>
+  <a href="#" class="btn btn-default" ng-click="addNewTodo(newTitle)">추가</a>
+</form>
+</body>
+</html>

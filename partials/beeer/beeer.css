@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+html,body{
+  height:100%;
+  font-size:16px;
+  overflow:hidden
+}
+ul,ol{
+  list-style: none;
+}
+a,
+a:hover{
+  text-decoration:none;
+}
+li a{
+  display:block;
+}
+
+/* --- header aside --- */
+header{
+  width:200px; height:calc(100% - 40px);
+  position:fixed;
+  border:1px #c9c9c9 solid;
+  overflow:hidden;
+}
+aside,
+nav{
+  height:100%;
+}
+aside h3{
+  padding:20px;
+  text-align:center;
+}
+.snb{
+  max-height:100%;
+  padding:0;
+  overflow:auto;
+}
+.snb li{
+  padding:5px 15px;
+  border-top:1px #c9c9c9 solid;
+  transition: 1s;
+  -webkit-transition: 1s;
+}
+.snb li:hover{
+  padding-left:20px;
+}
+.snb li.on{
+  background-color:#faf2c9;
+}
+.snb .home{
+  height:100px;
+  line-height:3;
+  font-size:1.8rem;
+  text-align:center;
+  border-top:0 none;
+}
+.snb .home:hover{
+  padding-left:15px;
+  font-size:2rem;
+}
+.snb .home.on{
+  background-color: transparent;
+}
+.home a{
+  color:#000;
+}
+.snb-sub{
+  display:none;
+  margin-top:5px;
+  padding:0;
+}
+.snb-sub li.on{
+  font-weight:bold;
+  background-color:#f9f9e9;
+}
+.end-list{
+  border-bottom:1px #c9c9c9 solid;
+}
+
+/* -- contents --*/
+article{
+  height:100%;
+  margin-left:200px;
+  border:1px #c9c9c9 solid;
+  border-left:0 none;
+  overflow:hidden;
+}
+section{
+  height:100%;
+  padding:30px;
+  position:relative;
+}
+section:first-child{
+  border-top:0 none;
+}
+
+.title{
+  margin-top:15%;
+  font-size:2.9rem;
+  text-align:center;
+}
+.g-name{
+  position:absolute;
+  right:calc(18% + 5px);
+  bottom:10%;
+  font-size:2rem;
+  text-align:right;
+}
+
+.content{
+  height:100%;
+  position:relative;
+  overflow:hidden;
+}
+.chapter{
+  padding-left:10px;
+  font-size:2rem;
+}
+.view-con{
+  margin-top:15px;
+  padding:10px;
+  border-top:1px #c9c9c9 solid;
+}
+
+.list-unstyled .checkbox input{
+  margin:0 10px 0 0;
+  position:static;
+}
+
+.code{
+  position:absolute;
+  right:0;
+  bottom:0;
+}
+.modal.in .modal-dialog.custom{
+  transform: translate(0, 25%);
+  -webkit-transform: translate(0, 25%);
+  -ms-transform: translate(0, 25%);
+  -moz-transform: translate(0, 25%);
+}
+
+/* --- ng-switch --- */
+.col-sm-4 h3{
+  height:60px;
+  border-bottom:1px #c9c9c9 solid;
+}
+.row.default{
+  padding:0;
+}
+.box{
+  width:100px;
+  height:100px;
+}
+.red{
+  background-color:#f00
+}
+.green{
+  background-color:#0f0;
+}
+.blue{
+  background-color:#00f;
+}
+.black{
+  background-color:#000;
+}
