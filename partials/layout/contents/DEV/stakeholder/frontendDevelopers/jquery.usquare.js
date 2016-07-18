@@ -188,18 +188,5 @@ Project demo: http://shindiristudio.com/usquare/
 
 
 $(window).load(function() {
-	$(".usquare_about").mCustomScrollbar();
+
 });
-
-(function($) {
-    $(document).ready(function() {
-        $(".usquare_module_wrapper").uSquare({
-            opening_speed: 300,
-            closing_speed: 500,
-            easing: 'swing'
-        });
-
-    });
-
-
-})(jQuery);

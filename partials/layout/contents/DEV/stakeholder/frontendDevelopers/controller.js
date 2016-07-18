@@ -15,7 +15,6 @@ define(['projectWeb'], function () {
                       'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jquery.mousewheel.min.js',
                       'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jcarousel.min.js',
                       'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jquery.usquare.js',
-                      'partials/layout/contents/DEV/stakeholder/frontendDevelopers/custom.js',
 
 		                  'AdminLTE-2.3.3/plugins/datatables/jquery.dataTables.min.css',
 		                  'AdminLTE-2.3.3/plugins/datatables/dataTables.bootstrap.css',
@@ -24,6 +23,9 @@ define(['projectWeb'], function () {
           ]).then(function() {
         	  frontendDevelopersService.fire();
         	  devLayoutService.fire();
+            frontendDevelopersService.jcarousel();
+            frontendDevelopersService.uSquare();
+            frontendDevelopersService.customScroll();
 	    });
 
 
