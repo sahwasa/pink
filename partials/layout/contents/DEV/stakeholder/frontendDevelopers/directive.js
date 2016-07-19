@@ -2,7 +2,6 @@
 define(['projectWeb'
 ], function() {
   var frontendDevelopers = angular.module('projectWeb', []);
-
   frontendDevelopers
   .directive('frontendDev',function(){
     return{
@@ -12,8 +11,7 @@ define(['projectWeb'
         photo :"@photos",
         name : "@names",
         job : "@jobs",
-        mail: "@mails",
-        about : "@abouts"
+        mail : "@mails"
       }
     };
   });

@@ -28,7 +28,7 @@ define(['projectWeb'
 				console.log(file);
 			};
 		});
-		
+
 		$scope.$on('goToHome', function() {
 			$scope.contentWrapper = 'partials/layout/contents/DEV/';
 			console.log("goToHome");
@@ -417,6 +417,10 @@ define(['projectWeb'
 			}, {
 				name : 'frontendDevelopersController',
 				files : ['partials/layout/contents/DEV/stakeholder/frontendDevelopers/controller.js'
+				]
+			}, {
+				name : 'frontendDevelopersDirective',
+				files : ['partials/layout/contents/DEV/stakeholder/frontendDevelopers/directive.js'
 				]
 			}, 'partials/layout/contents/DEV/stakeholder/frontendDevelopers/index.css'
 			]).then(function() {

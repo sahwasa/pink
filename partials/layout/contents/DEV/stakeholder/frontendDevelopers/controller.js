@@ -44,24 +44,21 @@ define(
 															frontendDevelopersService
 																	.customScroll();
 														});
-
-                            var frontDevList=[
-                              {
-                                photo:"LDM.jpeg",
-                                name:"이동민",
-                                job:"Java Developer / Architecture",
-                                mail:"mailto:313@313.co.kr",
-                                about:'My name is Lee DongMin.'
-                              },
-                              {
-                                photo:"LCY.jpg",
-                                name:"이창용",
-                                job:"Web Programmer",
-                                mail:"mailto:313@313.co.kr",
-                                about:'My name is Lee.'
-                              }
-                            ];
-                            $scope.frontDevList=frontDevList;
+                      var frontDevList=[
+                        {
+                          photo:"LDM.jpeg",
+                          name:"이동민",
+                          job:"Java Developer / Architecture",
+                          mail:"mailto:313@313.co.kr"
+                        },
+                        {
+                          photo:"LCY.jpg",
+                          name:"이창용",
+                          job:"Web Programmer",
+                          mail:"mailto:313@313.co.kr"
+                        }
+                      ];
+                      $scope.frontDevList=frontDevList;
 									}
 							]);// frontendDevelopersController.controller
 
