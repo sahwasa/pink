@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="projectWeb">
+<html ng-app="projectWeb" lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>TODO App Demo</title>
+    <title>Pink : angularJs study</title>
     <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="../../lib/angular/angular.min.js"></script>
@@ -18,7 +18,6 @@
       <li class="list-group-item">박성현</li>
       <li class="list-group-item list-group-item-danger">반미선 <span class="badge">여자라서 조장</span></li>
       <li class="list-group-item">윤봉태</li>
-      <li class="list-group-item">장지원</li>
     </ul>
 
     <div class="nav">
@@ -40,8 +39,10 @@
       <a href="#link14" class="label label-primary">MVC</a>
       <a href="#link15" class="label label-primary">Module</a>
       <a href="#link16" class="label label-primary">Directive</a>
-      <a href="#link17" class="label label-primary">Transclude</a>
-
+      <a href="#link17" class="label label-primary">자체 템플릿을 가지는 지시자</a>
+      <a href="#link18" class="label label-primary">scope설정</a>
+      <a href="#link19" class="label label-primary">Transclude</a>
+      <a href="#link20" class="label label-primary">Plugin</a>
     </div>
 
     <!-- todoApp -->
@@ -564,25 +565,246 @@
   	</div>
   	<!-- Directive__e -->
 
-  	<!-- transclude -->
-   	<div id="link17" class="page-header">
+
+
+    <!-- 자체 템플릿을 가지는 지시자 -->
+    <div id="link17" class="page-header">
+      <h1><small></small>자체 템플릿을 가지는 지시자</h1>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        지시자 정의코드 내부에 템플릿을 가지는 지시자
+      </div>
+      <div hello1 name="Pink_template" class="panel-body"></div>
+    </div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        템플릿 코드와 지시자 정의 코드분리
+      </div>
+      <div class="panel-body">
+        <div hello2 name="Pink_templateUrl"></div>
+      </div>
+    </div>
+    <!-- 자체 템플릿을 가지는 지시자__e -->
+
+    <!-- scope설정 -->
+    <div id="link18" class="page-header">
+      <h1><small></small>scope 설정</h1>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        scope속성을 별도로 명시하지 않아 default값인 false가 들어감
+      </div>
+      <div class="panel-body">
+        <p class="panel panel-primary panel-body">따라서 별도의 scope를 생성하지 않고 표현식은 부모 scope를 이용해 계산하여 다른 모든 지시자에 영향을 주게 된다. 가장 하단 지시자 name값으로 덮어써버린다.</p>
+        <div hello3 name="neo"></div>
+        <div class="hello3" name="prodo"></div>
+        <hello3 name="muji"></hello3>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        scope속성 true일 때
+      </div>
+      <div class="panel-body">
+        <p class="panel panel-primary panel-body">scope속성을 true값으로 주면 템플릿별 scope가 생성되어 name값이 이전 지시자의 scope를 덮어쓰지 않는다.</p>
+        <div hello3_re name="neo"></div>
+        <div class="hello3_re" name="prodo"></div>
+        <hello3_re name="con"></hello3>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        부모 scope를 상속받음
+      </div>
+      <div class="panel-body">
+        <p class="panel panel-primary panel-body"> hollo3지시자 내부 scope가 부모 scope로 상속받아서 mainCtrl의 name 값을 참조한다</p>
+        <div hello3_re2></div>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <samp>" @ "을 이용한 독립 scope 설정</samp>
+      </div>
+      <div class="panel-body" ng-controller="directiveCtrl">
+        <p class="panel panel-primary panel-body"><samp> "@"를 이용해 DOM의 속성값 to가 지시자 내부 name속성에 연결됨.<br/>
+          따라서 if($attrs.name) $scope.name = $attrs.name;코드는 필요없어짐<br/>
+          이를 응용하면 속성값 to에 표현식을 사용하여 부모 scope의 값을 전달할 수도 있다.
+        </p>
+        <div hello4 to="neo"></div>
+        <div class="hello4" to="prodo"></div>
+        <hello4 to="muji"></hello4>
+        <div hello4></div>
+        <ul class="list-unstyled">
+          <li ng-repeat="kakao in kakaoList" hello4 to="{{kakao.name}}">
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        " &amp; "을 이용한 독립 스코프설정
+      </div>
+      <div class="panel-body" ng-controller="directiveCtrl">
+        <p class="panel panel-primary panel-body">“&amp;"나 “&amp;연결된 DOM속성명” 을 주면 부모 scope를 기준으로 주어진 표현식을 계산할 수 있음.<br/>
+          따라서 if($attrs.name) $scope.name = $attrs.name;코드는 필요없어짐<br/>
+          이를 응용하면 속성값 to에 표현식을 사용하여 부모 scope의 값을 전달할 수도 있다.
+        </p>
+        <ul class='list-unstyled'>
+          <li ng-repeat="kakao in kakaoList" hello5 to="{{kakao.name}}" send="sendMessage(kakao.name)"></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        " = "을 이용한 독립 스코프설정
+      </div>
+      <div class="panel-body" ng-controller="directiveCtrl">
+        <p class="panel panel-primary panel-body">
+          템플릿의 인풋 마크업
+        </p>
+        <ul class="list-unstyled">
+          <li ng-repeat="kakao in kakaoList">
+            <input type="text" ng-model="kakao.name" class="form-control"/>
+          </li>
+        </ul>
+        <hr/>
+        <p class="panel panel-primary panel-body" style="margin-top:30px;">
+          hello6 지시자로 만든 인풋 마크업
+        </p>
+        <ul class="list-unstyled">
+          <li ng-repeat="kakao in kakaoList" hello6 to="kakao.name">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- scope설정__e -->
+
+    <!-- transclude -->
+    <div id="link19" class="page-header">
       <h1><small></small>Transclude</h1>
     </div>
-    <div ng-controller="transCtrl">
-    	<div>
-    	<panel title="알림" type="alert">
-    		<p>AngularJS는 자바스크립트 웹 애플리케이션을 쉽게 개발하게 도와줍니다.</p>
-    	</panel>
-    	<panel title="공지사항 목록" type="info">
-    		<ul>
-    			<li ng-repeat="notice in noticeList">
-    				<a href="{{notice.url}}">{{notice.text}}</a>
-    			</li>
-    		</ul>
-    	</panel>
-    	</div>
+    <div ng-controller="transCtrl" class="transclude">
+      <panel title="알림" type="alert">
+        <p>AngularJS는 자바스크립트 웹 애플리케이션을 쉽게 개발하게 도와줍니다.</p>
+      </panel>
+      <panel title="공지사항 목록" type="info">
+        <ol>
+          <li ng-repeat="notice in noticeList">
+            <a href="{{notice.url}}">{{notice.text}}</a>
+          </li>
+        </ol>
+      </panel>
+      <div class="bg-info" style="padding:10px;">
+        transclude에 true값을 주면 템플릿에서 nj-transclude라고 설정된 부분에
+        &lt;pannel&gt;태그의 내용이 복사된다.<br/>
+        AngularJs의 transclude를 이용하면 컨테이너 역할을 하는
+        UI컴포넌트를 재사용 하도록 만들 수 있다.
+      </div>
     </div>
-  	<!-- transclude__e -->
+    <!-- transclude__e -->
+
+    <!-- plugin -->
+    <div id="link20" class="page-header">
+      <h1><small></small>plugin</h1>
+    </div>
+    <script type="text/javascript" src="../../lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="plugin/jquery.sparkline.js"></script>
+
+    <div class="pannel panel-warning">
+      <div class="panel-heading">
+        외부라이브러리인 스파크라인 플러그인을 이용한 미니차트
+      </div>
+      <div class="panel-body">
+        <div class="sparkline">
+          <ng-sparkline chart-data="[1,22,4,2,12,3]" chart-type="bar" ></ng-sparkline>
+     	    <div ng-sparkline chart-data="[3,4,2,10,3,4,11]"></div>
+        </div>
+        <p class="panel panel-warning panel-body">
+          스파크라인 플러그인은 인자가 숫자형 데이터를 포함한 배열이어야한다.<br/>
+          chart-data="[1,22,4,2,12,3]"는 문자열이므로 이를 배열로 바꾸기 위해<br/>
+          $eval메서드를 사용했다
+        </p>
+      </div>
+    </div>
+
+    <div class="pannel panel-warning">
+      <div class="panel-heading">
+        데이터를 컨트롤러에서 가져오는 미니차트
+      </div>
+      <div class="panel-body" ng-controller="chart">
+        <div ng-controller="chart" class="sparkline">
+          <ng-sparkline2 chart-data="chartData1" chart-type="bar" ></ng-sparkline2>
+     	    <div ng-sparkline2 chart-data="chartData2"></div>
+        </div>
+        <p class="panel panel-warning panel-body">
+          보통 데이터는 템플릿이 아닌 컨트롤러에 작성된다.<br/>
+          scope옵션 '='을 주어서 별도 $eval 메서드가 필요없다.
+        </p>
+      </div>
+    </div>
+
+    <div class="pannel panel-warning">
+      <div class="panel-heading">
+        동적인 미니차트
+      </div>
+      <div class="panel-body" ng-controller="chart">
+        <div ng-controller="dChart">
+          <input type="number" ng-model="chartData3[0]" />
+          <input type="number" ng-model="chartData3[1]" />
+          <input type="number" ng-model="chartData3[2]" />
+          <p>데이터 : {{chartData3}}</p>
+          <div>
+            <ng-sparkline3 chart-data="chartData3" chart-type="bar"></ng-sparkline3>
+          </div>
+        </div>
+        <p class="panel panel-warning panel-body">
+          정적인 이 컴포넌트를 AngularJs의 데이터바인딩 기능과 지시자 기능으로<br/>
+          보다 쉽게 동적이며 재사용 가능한 컴포넌트로 만들 수 있다.<br/>
+          scope객체의 watch메서드를 사용한 동적 컴포넌트<br/>
+          watch메서드에 chartdata 표현식을 인자로 주면 해당 값이 바뀔때마다 호출
+        </p>
+      </div>
+    </div>
+
+    <div class="pannel panel-warning">
+      <div class="panel-heading">
+        데이터바인딩 기능을 지원하는 컴포넌트 만들기
+      </div>
+      <div class="panel-body" ng-controller="dChart_click">
+        <input type="number" ng-model="chartData4[0]" />
+        <input type="number" ng-model="chartData4[1]" />
+        <input type="number" ng-model="chartData4[2]" />
+        <p>데이터 : {{chartData4}}</p>
+        <div>
+          <ng-sparkline4 chart-data="chartData4" chart-type="bar" chart-click="handleClick(x,y)"></ng-sparkline4>
+          <ng-sparkline4 chart-data="chartData4" chart-type="line" chart-click="handleClick(x,y)"></ng-sparkline4>
+
+          <p>선택한 데이터 : X는 {{selectedData.x}} y는 {{selectedData.y}}</p>
+        </div>
+        <p class="panel panel-warning panel-body">
+          템플릿에 chart-click속성을 추가하고 handleClick(x,y) 표현식을 값으로 주었다.<br/>
+          이는 scope의 handleClick함수를 호출한다.<br/>
+          handleClick함수는 단순 전달받은 x와 y갑슬 selectedData에 넣어준다.<br/>
+          scope 설정에 chartClick을 "&"로 설정하여 지시자 내부 scope의 chartClick이<br/>
+          dChart_click컨트롤러 scope의 handleClick을 포함하는 함수가 된다.<br/>
+          이 지시자 내부에서 link함수를 보면 jQuery를 이용하여<br/>
+          스파크라인 그래프에 sparklineClick이벤트를 추가했다.<br/>
+          이후 클릭한 그래프의 x,y값을 가져와 scope.chartClick을 실행한다.<br/>
+          링크함수에서 $apply 부분을 주시해서 보아야한다.<br/>
+          만약 scope.chartClick();을 &apply익명함수 안에서 호출하지 않으면<br/>
+          제대로 실행되지 않을 것이다.
+        </p>
+      </div>
+    </div>
+    <!-- plugin__e -->
+
+
 </div>
 </body>
 </html>

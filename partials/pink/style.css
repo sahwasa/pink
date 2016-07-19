@@ -8,7 +8,6 @@ a[href="#wrap"]{position:fixed;top:50%;right:20px;}
 #link11+form .ng-pristin{border-style:solid;}
 #link11+form .ng-dirty{border-style:dashed;}
 
-.list01 { }
 .list01 li { display:inline-block; margin:0 10px 10px 0; width:100px; height:120px;}
 .list01 li input { padding: 0 5px; width:100px; height:30px;  -webkit-box-sizing:border-box;box-sizing:border-box;}
 .list01 li p { text-align:center; }
@@ -20,9 +19,3 @@ a[href="#wrap"]{position:fixed;top:50%;right:20px;}
 .green{ color:green; }
 .darkgrey{ color:darkgrey; }
 .even { background-color:#444; color:#fff; }
-
-.panel{ margin : 10px; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; border: 1px solid black; }
-.panel.info .panel-title{ background-color:gray; color:white; }
-.panel.alert .panel-title{ background-color:red; color : white; }
-.panel .panel-title{ background-color:black; color : white; padding:10px;}
-.panel .panel-content{ padding:10px; }

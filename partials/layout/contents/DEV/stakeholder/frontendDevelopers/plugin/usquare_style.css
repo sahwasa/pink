@@ -1,0 +1,226 @@
+.clear {
+    clear: both;
+}
+.usquare_module_wrapper {
+    margin: 0 auto;
+    /*width: 960px;*/
+    width:100%;
+}
+.usquare_module_wrapper h2 {
+    color: #ffffff;
+    font-family: "OstrichSansMedium";
+    font-size: 34px;
+    line-height: 34px;
+    margin: 0;
+    padding: 0;
+}
+.usquare_module_wrapper span {
+    color: #ffffff;
+    display: block;
+    font-family: "PTSansRegular";
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+.usquare_module_wrapper ul {
+    margin: 0;
+    padding: 0;
+}
+.usquare_module_wrapper li {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.usquare_module_wrapper .bold {
+    font-weight: bold;
+    margin: 5px 15px 0;
+}
+.usquare_module_wrapper a {
+    text-decoration: none;
+}
+.usquare_module_wrapper img {
+    border: medium none;
+    vertical-align: inherit;
+}
+.separator_block {
+    display: block;
+    height: 100px;
+    width: 960px;
+}
+.usquare_block {
+    float: left;
+    height: 160px;
+    position: relative;
+    text-align: left;
+    width: 320px;
+}
+.usquare_square {
+    display: block;
+    float: left;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+    width: 160px;
+}
+img.usquare_square {
+    cursor: pointer;
+}
+.usquare_block .usquare_r {
+    text-align: right;
+}
+.usquare_square_text_wrapper {
+    bottom: 0;
+    padding: 0 5px;
+    position: absolute;
+    text-align: left;
+}
+.usquare_arrow {
+    float: left;
+    margin-top: 5px;
+    padding: 0 5px 5px;
+}
+.usquare_arrow_r {
+    float: right;
+}
+.usquare_block_selected {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    z-index: 3;
+}
+.usquare_block_selected img.usquare_square {
+    cursor: auto;
+    filter: none;
+}
+.usquare_module_wrapper {
+    position: relative;
+}
+.usquare_module_shade {
+    background-color: #000000;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+.usquare_block_extended {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    display: none;
+    height: 320px;
+    margin-top: 160px;
+    width: 320px;
+}
+.usquare_block_extended .close {
+    cursor: pointer;
+    left: 280px;
+    position: absolute;
+    top: 10px;
+}
+.usquare_block_extended .close_left_side {
+    left: 10px;
+}
+.usquare_block_extended li {
+    display: inline-block;
+}
+.usquare_block_extended li a {
+    display: block;
+    margin: 0 4px;
+    padding: 8px 5px 5px;
+}
+.usquare_block_extended li a:hover {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+}
+.usquare_block_extended ul.social_background {
+    background-color: rgba(0, 0, 0, 0.15);
+    display: block;
+    opacity: 1;
+    padding: 0;
+    width: 100%;
+    z-index: 4;
+}
+.usquare_block_extended .usquare_about {
+    color: #ffffff;
+    font-family: "PTSansRegular";
+    font-size: 14px;
+    height: 245px;
+    margin: 0 15px;
+    overflow: hidden;
+    padding: 0;
+}
+img.usquare_square {
+    /*filter: url("filters.svg#grayscale");*/
+}
+img.usquare_square:hover {
+    filter: none;
+}
+.usquare_square_bg1 {
+    background-color: #ef4939;
+}
+.usquare_square_bg2 {
+    background-color: #f05539;
+}
+.usquare_square_bg3 {
+    background-color: #f15e3c;
+}
+.usquare_square_bg4 {
+    background-color: #f2673c;
+}
+.usquare_square_bg5 {
+    background-color: #f36f3e;
+}
+.usquare_square_bg6 {
+    background-color: #f4773d;
+}
+.usquare_square_bg7 {
+    background-color: #f57f3f;
+}
+.usquare_square_bg8 {
+    background-color: #f5863f;
+}
+.usquare_square_bg9 {
+    background-color: #f78d41;
+}
+@media screen and (max-width: 980px) {
+.usquare_module_wrapper {
+    /*width: 640px;*/
+    width:100%;
+}
+}
+@media screen and (max-width: 660px) {
+.usquare_module_wrapper {
+    /*width: 320px;*/
+    width:100%;
+}
+}
+@media screen and (max-width: 340px) {
+.usquare_module_wrapper {
+    /*width: 280px;*/
+    width:100%;
+}
+.usquare_block {
+    height: 140px;
+    width: 280px;
+}
+.usquare_square {
+    height: 140px;
+    width: 140px;
+}
+.usquare_block_extended {
+    height: 280px;
+    margin-top: 140px;
+    width: 280px;
+}
+.usquare_block_extended li {
+    margin: 11px 6px 0;
+}
+.usquare_block_extended ul {
+    top: 160px;
+}
+.usquare_block_extended .close {
+    left: 240px;
+}
+.usquare_block_extended .usquare_about {
+    height: 205px;
+}
+}

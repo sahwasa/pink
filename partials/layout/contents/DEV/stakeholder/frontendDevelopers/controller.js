@@ -1,34 +1,69 @@
 'use strict';
 
-define(['projectWeb'], function () {
+define(
+		['projectWeb'
+		],
+		function() {
 
-	var frontendDevelopersModule = angular.module('projectWeb', ['ui.router', 'oc.lazyLoad', 'frontendDevelopersService', 'devLayoutService']);
+			var frontendDevelopersModule = angular.module('projectWeb', [
+					'ui.router', 'oc.lazyLoad', 'frontendDevelopersService',
+					'devLayoutService'
+			]);
 
-	frontendDevelopersModule.controller('frontendDevelopersController', ['$scope', '$ocLazyLoad', 'frontendDevelopersService', 'devLayoutService',
-	                                      	        function($scope, $ocLazyLoad, frontendDevelopersService, devLayoutService) {
+			frontendDevelopersModule
+					.controller(
+							'frontendDevelopersController',
+							[
+									'$scope',
+									'$ocLazyLoad',
+									'frontendDevelopersService',
+									'devLayoutService',
+									function($scope, $ocLazyLoad,
+											frontendDevelopersService,
+											devLayoutService) {
 
-		$ocLazyLoad.load([
-		                  'partials/common/js/jstree-v.pre1.0/_lib/jquery.cookie.js',
-		                  'partials/common/js/jstree-v.pre1.0/_lib/jquery.hotkeys.js',
-		                  'partials/common/js/jstree-v.pre1.0/jquery.jstree.js',
-                      'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jquery.mCustomScrollbar.min.js',
-                      'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jquery.mousewheel.min.js',
-                      'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jcarousel.min.js',
-                      'partials/layout/contents/DEV/stakeholder/frontendDevelopers/jquery.usquare.js',
+										$ocLazyLoad
+												.load(
+														[
+																'partials/layout/contents/DEV/stakeholder/frontendDevelopers/plugin/jquery.mCustomScrollbar.min.js',
+																'partials/layout/contents/DEV/stakeholder/frontendDevelopers/plugin/jquery.mousewheel.min.js',
+																'partials/layout/contents/DEV/stakeholder/frontendDevelopers/plugin/jcarousel.min.js',
+																'partials/layout/contents/DEV/stakeholder/frontendDevelopers/plugin/jquery.usquare.js'
+														])
+												.then(
+														function() {
 
-		                  'AdminLTE-2.3.3/plugins/datatables/jquery.dataTables.min.css',
-		                  'AdminLTE-2.3.3/plugins/datatables/dataTables.bootstrap.css',
-		              	  'AdminLTE-2.3.3/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'
+															frontendDevelopersService
+																	.fire();
+															devLayoutService
+																	.fire();
+															frontendDevelopersService
+																	.jcarousel();
+															frontendDevelopersService
+																	.uSquare();
+															frontendDevelopersService
+																	.customScroll();
+														});
 
-          ]).then(function() {
-        	  frontendDevelopersService.fire();
-        	  devLayoutService.fire();
-            frontendDevelopersService.jcarousel();
-            frontendDevelopersService.uSquare();
-            frontendDevelopersService.customScroll();
-	    });
+                            var frontDevList=[
+                              {
+                                photo:"LDM.jpeg",
+                                name:"이동민",
+                                job:"Java Developer / Architecture",
+                                mail:"mailto:313@313.co.kr",
+                                about:'My name is Lee DongMin.'
+                              },
+                              {
+                                photo:"LCY.jpg",
+                                name:"이창용",
+                                job:"Web Programmer",
+                                mail:"mailto:313@313.co.kr",
+                                about:'My name is Lee.'
+                              }
+                            ];
+                            $scope.frontDevList=frontDevList;
+									}
+							]);// frontendDevelopersController.controller
 
 
-	}]);//frontendDevelopersController.controller
-
-});
+		});
